@@ -13,9 +13,32 @@ datasource db {
   
 }
 
-model Note {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
+model Project{
+
+  id Int @id @default(autoincrement())
+  title String
+  desciption String
+  githubUrl String 
   createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+}
+
+model Notes{
+  id Int @id @default(autoincrement())
+  title String 
+  content String
+  category String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Snippet{
+  id Int @id @default(autoincrement())
+  title String
+  code String
+  language String
+  desciption String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
