@@ -26,7 +26,7 @@ export async function PATCH(request:Request,{params}:{params:Promise<{id:string}
         data:{
             ...(body.title!==undefined && {title:body.title}),
             ...(body.desciption!==undefined && {desciption:body.   desciption}),
-            ...(body.githubUrl==!undefined && {githubUrl:body.githubUrl})
+            ...(body.githubUrl!==undefined && {githubUrl:body.githubUrl})
         }
     });
 
