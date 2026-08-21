@@ -4,9 +4,13 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Merriweather, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Merriweather, JetBrains_Mono, Source_Code_Pro, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+
+const sourceSerif4SourceSerif4 = Source_Serif_4({subsets:['latin','latin-ext','cyrillic','cyrillic-ext','greek','vietnamese'],weight:['200','300','400','500','600','700','800','900'],variable:'--font-source-serif-4'});
+
+const sourceCodeProSourceCodePro = Source_Code_Pro({subsets:['latin','latin-ext','cyrillic','cyrillic-ext','greek','greek-ext','vietnamese'],weight:['200','300','400','500','600','700','800','900'],variable:'--font-source-code-pro'});
 
 const jetbrainsMonoJetbrainsMono = JetBrains_Mono({subsets:['latin','latin-ext','cyrillic','cyrillic-ext','greek','vietnamese'],weight:['100','200','300','400','500','600','700','800'],variable:'--font-jetbrains-mono'});
 
@@ -37,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("antialiased", geistSans.variable, geistMono.variable, interInter.variable, merriweatherMerriweather.variable, jetbrainsMonoJetbrainsMono.variable)}
+      className={cn("antialiased", geistSans.variable, geistMono.variable, interInter.variable, merriweatherMerriweather.variable, jetbrainsMonoJetbrainsMono.variable, sourceCodeProSourceCodePro.variable, sourceSerif4SourceSerif4.variable)}
       suppressHydrationWarning
     >
       <body className="min-h-screen">
