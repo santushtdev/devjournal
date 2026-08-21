@@ -4,8 +4,15 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Merriweather, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const jetbrainsMonoJetbrainsMono = JetBrains_Mono({subsets:['latin','latin-ext','cyrillic','cyrillic-ext','greek','vietnamese'],weight:['100','200','300','400','500','600','700','800'],variable:'--font-jetbrains-mono'});
+
+const merriweatherMerriweather = Merriweather({subsets:['cyrillic','cyrillic-ext','latin','latin-ext','vietnamese'],weight:['300','400','500','600','700','800','900'],variable:'--font-merriweather'});
+
+const interInter = Inter({subsets:['latin','latin-ext','cyrillic','cyrillic-ext','greek','greek-ext','vietnamese'],weight:['100','200','300','400','500','600','700','800','900'],variable:'--font-inter'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={cn("antialiased", geistSans.variable, geistMono.variable, interInter.variable, merriweatherMerriweather.variable, jetbrainsMonoJetbrainsMono.variable)}
       suppressHydrationWarning
     >
       <body className="min-h-screen">

@@ -12,7 +12,7 @@ export function SnippetItem({
     language,
     updatedAt
 }:SnippetItemsProps){
-    return(
+    return(<div className="cursor-pointer rounded-lg p-3 transition-all duration-200 hover:-translate-y-0.5 hover:bg-muted">
         <article className="group flex min-h-44 flex-col justify-between gap-6 rounded-lg border border-border/70 bg-background/70 p-4 transition-colors hover:border-primary/30 hover:bg-muted/40">
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-3">
@@ -50,6 +50,6 @@ export function SnippetItem({
           <ArrowUpRight aria-hidden="true" className="size-3.5" />
         </button>
       </div>
-    </article>
+    </article></div>
     )
 }

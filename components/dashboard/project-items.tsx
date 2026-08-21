@@ -14,7 +14,7 @@ export function ProjectItem({
     updatedAt
 
 }:ProjectItemsProps){
-    return (<article className="group flex min-h-44 flex-1 flex-col justify-between gap-4 rounded-lg border border-border/70 bg-background/70 p-4 transition-colors hover:border-primary/30 hover:bg-muted/40">
+    return (<div className="cursor-pointer rounded-lg p-3 transition-all duration-200 hover:-translate-y-0.5 hover:bg-muted"><article className="group flex min-h-44 flex-1 flex-col justify-between gap-4 rounded-lg border border-border/70 bg-background/70 p-4 transition-colors hover:border-primary/30 hover:bg-muted/40">
       <div className="flex min-w-0 items-start gap-3">
         <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/15">
           <GitBranch aria-hidden="true" className="size-4" />
@@ -56,5 +56,5 @@ export function ProjectItem({
           <ArrowUpRight aria-hidden="true" className="size-3.5" />
         </button>
       </div>
-    </article>  );
+    </article></div>  );
 }
