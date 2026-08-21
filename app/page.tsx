@@ -1,10 +1,16 @@
 import Image from "next/image";
+import { RecentProject } from "@/components/dashboard/recent-project";
+import { RecentNotes } from "@/components/dashboard/recent-notes";
+import { RecentSnippets } from "@/components/dashboard/recent-snippets";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex min-h-[calc(100vh-40px)] w-full items-center p-6">
+      <main className="grid w-full grid-cols-3 gap-6">
 
+      <RecentProject />
+      <RecentNotes />
+      <RecentSnippets />
       </main>
     </div>
   );

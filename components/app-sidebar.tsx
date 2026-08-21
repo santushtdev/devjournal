@@ -2,7 +2,7 @@
 import { Moon, Sun,  StickyNote, } from "lucide-react"
 
 import { FolderPlus, FolderKanban, NotebookPen, Code2 } from "lucide-react";
-
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import {
@@ -29,11 +29,12 @@ const items = [
 ];
 
 export function AppSidebar() {
-    const pathname = typeof window !== "undefined" ? window.location.pathname : "";
-const isActive = (url: string) => window.location.pathname === url;
+  const pathname = usePathname();
 
-const navigate = (url: string) => {
-  window.location.href = url;
+  const isActive = (url: string) => pathname === url;
+
+  const navigate = (url: string) => {
+    window.location.href = url;
 };
 
   return (
