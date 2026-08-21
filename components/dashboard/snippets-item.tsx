@@ -1,3 +1,4 @@
+import { ArrowUpRight, Code2 } from "lucide-react"
 type SnippetItemsProps={
     name: string;
     code: string;
@@ -12,20 +13,43 @@ export function SnippetItem({
     updatedAt
 }:SnippetItemsProps){
     return(
-        <div className="cursor-pointer rounded-lg p-3 transition hover:bg-muted">
-      <h3 className="font-medium">{name}</h3>
-
-      <p className="text-sm text-muted-foreground">
-        {code}
-      </p>
-
-      <p className="mt-2 text-xs text-muted-foreground">
-        {language.join(" · ")}
-      </p>
-
-      <p className="mt-1 text-xs text-muted-foreground">
-        {updatedAt}
-      </p>
-    </div>
+        <article className="group flex min-h-44 flex-col justify-between gap-6 rounded-lg border border-border/70 bg-background/70 p-4 transition-colors hover:border-primary/30 hover:bg-muted/40">
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-3">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/15">
+            <Code2 aria-hidden="true" className="size-4" />
+          </div>
+          <h3 className="truncate font-mono text-sm font-semibold tracking-tight text-foreground">
+            {name}
+          </h3>
+        </div>
+        <code className="block truncate rounded-md border border-border/60 bg-muted/40 px-3 py-2 font-mono text-xs text-muted-foreground">
+          {code}
+        </code>
+        <div className="flex flex-wrap gap-1.5">
+          {language.map((item) => (
+            <span
+              key={item}
+              className="rounded-md border border-border bg-card px-2 py-1 font-mono text-[11px] text-muted-foreground"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="flex items-center justify-between gap-3 border-t border-border/60 pt-3">
+        <span className="font-mono text-[11px] text-muted-foreground">
+          {updatedAt}
+        </span>
+        <button
+          type="button"
+          aria-label={`Open ${name}`}
+          className="inline-flex items-center gap-1 font-mono text-xs font-medium text-primary opacity-80 transition-opacity group-hover:opacity-100"
+        >
+          Open snippet
+          <ArrowUpRight aria-hidden="true" className="size-3.5" />
+        </button>
+      </div>
+    </article>
     )
 }
