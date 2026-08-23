@@ -1,13 +1,13 @@
 import { ArrowUpRight, Code2 } from "lucide-react"
 type SnippetItemsProps={
-    name: string;
+    title: string;
     code: string;
-    language: string[];
+    language: string;
     updatedAt: string;
 }
 
 export function SnippetItem({
-    name,
+    title,
     code,
     language,
     updatedAt
@@ -20,21 +20,17 @@ export function SnippetItem({
             <Code2 aria-hidden="true" className="size-4" />
           </div>
           <h3 className="truncate font-mono text-sm font-semibold tracking-tight text-foreground">
-            {name}
+            {title}
           </h3>
         </div>
         <code className="block truncate rounded-md border border-border/60 bg-muted/40 px-3 py-2 font-mono text-xs text-muted-foreground">
           {code}
         </code>
         <div className="flex flex-wrap gap-1.5">
-          {language.map((item) => (
-            <span
-              key={item}
-              className="rounded-md border border-border bg-card px-2 py-1 font-mono text-[11px] text-muted-foreground"
-            >
-              {item}
+          <span>
+            {language}
             </span>
-          ))}
+          
         </div>
       </div>
       <div className="flex items-center justify-between gap-3 border-t border-border/60 pt-3">
@@ -43,7 +39,7 @@ export function SnippetItem({
         </span>
         <button
           type="button"
-          aria-label={`Open ${name}`}
+          aria-label={`Open ${title}`}
           className="inline-flex items-center gap-1 font-mono text-xs font-medium text-primary opacity-80 transition-opacity group-hover:opacity-100"
         >
           Open snippet

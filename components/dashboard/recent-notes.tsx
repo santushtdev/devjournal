@@ -10,7 +10,19 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export function RecentNotes(){
+ type Notes={
+  id : number
+  title:string 
+  content : string
+  category : string | null
+  createdAt: Date
+  updatedAt: Date
+ }
+ type RecentNotesProps = {
+  notes : Notes[],
+}
+
+export function RecentNotes({notes}:RecentNotesProps){
     return(
         <Card  className="flex h-full flex-col border-border/70 bg-card/95 shadow-sm rounded-xl">
   <CardHeader className="min-h-36 border-b border-border/70 bg-muted/20 px-5 py-5">
@@ -27,7 +39,15 @@ export function RecentNotes(){
     </CardAction>
   </CardHeader>
   <CardContent className="flex flex-1 flex-col p-4 sm:p-5">
-        <NoteItem name="My Note" description="Some description" updatedAt="Updated recently" />
+        {notes.map((note) => (
+  <NoteItem
+    key={note.id}
+    title={note.title}
+    content={note.content}
+    category={note.category}
+    updatedAt={note.updatedAt.toLocaleDateString()}
+  />
+))}
       </CardContent>
  
 </Card>

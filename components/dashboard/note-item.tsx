@@ -1,12 +1,15 @@
 import { ArrowUpRight, FileText } from "lucide-react"
 type NoteItemProps={
-    name: string;
-    description: string;
+    title:string 
+    content : string
+    category : string | null
+    
     updatedAt: string;
 }
 export function NoteItem({
-    name,
-    description,
+    title,
+    content,
+    category,
     updatedAt
 
 }:NoteItemProps){
@@ -18,10 +21,13 @@ export function NoteItem({
         </div>
         <div className="min-w-0">
           <h3 className="truncate font-mono text-sm font-semibold tracking-tight text-foreground">
-            {name}
+            {title}
+          </h3>
+          <h3 className="truncate font-mono text-sm font-semibold tracking-tight text-foreground">
+            {category}
           </h3>
           <p className="mt-1 text-sm leading-6 text-muted-foreground">
-            {description}
+            {content}
           </p>
         </div>
       </div>
@@ -31,7 +37,7 @@ export function NoteItem({
         </span>
         <button
           type="button"
-          aria-label={`Open ${name}`}
+          aria-label={`Open ${title}`}
           className="inline-flex items-center gap-1 font-mono text-xs font-medium text-primary opacity-80 transition-opacity group-hover:opacity-100"
         >
           Open note

@@ -11,7 +11,20 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export function RecentSnippets(){
+type Snippet = {
+  id: number
+  title: string
+  code: string
+  language: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+type RecentSnippetsProps = {
+  snippets: Snippet[]
+}
+
+export function RecentSnippets({ snippets }: RecentSnippetsProps){
     return(
        <Card className="flex h-full flex-col border-border/70 bg-card/95 shadow-sm rounded-xl">
       <CardHeader className="min-h-36 border-b border-border/70 bg-muted/20 px-5 py-5">
@@ -32,7 +45,15 @@ export function RecentSnippets(){
         </CardAction>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col p-4 sm:p-5">
-        <SnippetItem name="API code" code="<include>" language={["Ts", "Js"]} updatedAt="Updated successfully" />
+        {snippets.map((snippet) => (
+  <SnippetItem
+    key={snippet.id}
+    title={snippet.title}
+    code={snippet.code}
+    language={snippet.language}
+    updatedAt={snippet.updatedAt.toLocaleDateString()}
+  />
+))}
       </CardContent>
     </Card>
     )
