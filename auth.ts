@@ -36,11 +36,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           },
         });
 
-        
+        console.log("USER FOUND:", user ? {
+          id: user.id,
+          email: user.email,
+          hasPassword: !!user.password,
+        } : null);
+
         if (!user || !user.password) {
           return null;
         }
-
         
         const isValidPassword = await bcrypt.compare(
           credentials.password,

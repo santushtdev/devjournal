@@ -2,6 +2,7 @@
 
 import type { FormEvent } from "react"
 import { signIn } from "next-auth/react"
+import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -31,7 +32,11 @@ export default function CardDemo() {
       redirect: false,
     })
 
-    console.log(result)
+    console.log("LOGIN RESULT:", result)
+
+    if (result?.ok) {
+      window.location.href = "/"
+    }
   }
 
   return (
@@ -45,9 +50,11 @@ export default function CardDemo() {
           </CardDescription>
 
           <CardAction>
-            <Button variant="link">
-              Sign Up
-            </Button>
+            <Link href="/register">
+              <Button variant="link">
+                Sign Up
+              </Button>
+            </Link>
           </CardAction>
         </CardHeader>
 
