@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
@@ -20,11 +21,9 @@ export default async function ProjectsPage() {
   });
 
   return (
-    <main className="min-h-screen p-6">
+    <main className="min-h-screen p-4 sm:p-6">
       <div className="mx-auto max-w-5xl">
-
-        
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-3xl font-bold">
               Projects
@@ -37,15 +36,14 @@ export default async function ProjectsPage() {
 
           <Link
             href="/projects/create"
-            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+            className="w-full rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground hover:opacity-90 sm:w-auto"
           >
             + Create Project
           </Link>
         </div>
 
-        
         {projects.length === 0 ? (
-          <div className="rounded-xl border p-10 text-center">
+          <div className="rounded-xl border p-6 text-center sm:p-10">
             <h2 className="text-lg font-semibold">
               No projects yet
             </h2>
@@ -69,16 +67,16 @@ export default async function ProjectsPage() {
                 className="rounded-xl border p-5 shadow-sm"
               >
                 <div className="mb-4">
-                  <h2 className="text-xl font-semibold">
+                  <h2 className="break-words text-xl font-semibold">
                     {project.title}
                   </h2>
 
-                  <p className="mt-2 text-sm text-muted-foreground">
+                  <p className="mt-2 break-words text-sm text-muted-foreground">
                     {project.desciption}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <a
                     href={project.githubUrl}
                     target="_blank"
@@ -108,7 +106,6 @@ export default async function ProjectsPage() {
             ))}
           </div>
         )}
-
       </div>
     </main>
   );

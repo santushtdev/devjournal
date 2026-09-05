@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
@@ -60,26 +61,26 @@ export default async function Home() {
     .toUpperCase();
 
   return (
-    <div className="flex min-h-[calc(100vh-40px)] w-full items-center p-6">
-      <main className="grid w-full grid-cols-3 gap-6">
+    <div className="flex min-h-[calc(100vh-40px)] w-full items-center p-4 pt-20 sm:p-6">
+      <main className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
         <RecentProject projects={projects} />
         <RecentNotes notes={notes} />
         <RecentSnippets snippets={snippets} />
       </main>
 
-      <div className="fixed right-6 top-6 flex items-center gap-3">
+      <div className="fixed right-4 top-4 flex items-center gap-3 sm:right-6 sm:top-6">
         {!session ? (
           <>
             <Link
               href="/login"
-              className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-muted"
+              className="rounded-md border px-3 py-2 text-sm font-medium hover:bg-muted sm:px-4"
             >
               Login
             </Link>
 
             <Link
               href="/register"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+              className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:px-4"
             >
               Sign Up
             </Link>

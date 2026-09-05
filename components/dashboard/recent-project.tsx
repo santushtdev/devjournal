@@ -71,6 +71,7 @@ export function RecentProject({ projects }: RecentProjectProps) {
           recentProjects.map((project) => (
             <ProjectItem
               key={project.id}
+              id={project.id}
               title={project.title}
               desciption={project.desciption}
               githubUrl={project.githubUrl}

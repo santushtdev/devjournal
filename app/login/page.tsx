@@ -1,3 +1,4 @@
+
 "use client"
 
 import type { FormEvent } from "react"
@@ -35,23 +36,25 @@ export default function CardDemo() {
     console.log("LOGIN RESULT:", result)
 
     if (result?.ok) {
-      window.location.href = "/"
+      window.location.href = "/dashboard";
     }
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center rounded-xl">
+    <main className="flex min-h-screen w-full items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
       <Card className="w-full max-w-sm rounded-xl">
-        <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+        <CardHeader className="gap-3">
+          <CardTitle className="text-xl sm:text-2xl">
+            Login to your account
+          </CardTitle>
 
-          <CardDescription>
+          <CardDescription className="max-w-xs text-sm leading-5">
             Enter your email below to login to your account
           </CardDescription>
 
           <CardAction>
             <Link href="/register">
-              <Button variant="link">
+              <Button variant="link" className="px-2">
                 Sign Up
               </Button>
             </Link>
@@ -61,8 +64,6 @@ export default function CardDemo() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="flex flex-col gap-6">
-
-              {/* Email */}
               <div className="grid gap-2">
                 <Label htmlFor="email">
                   Email
@@ -74,19 +75,19 @@ export default function CardDemo() {
                   type="email"
                   placeholder="m@example.com"
                   required
+                  className="min-w-0"
                 />
               </div>
 
-              {/* Password */}
               <div className="grid gap-2">
-                <div className="flex items-center">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <Label htmlFor="password">
                     Password
                   </Label>
 
                   <a
                     href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    className="ml-auto text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
                   </a>
@@ -97,25 +98,17 @@ export default function CardDemo() {
                   name="password"
                   type="password"
                   required
+                  className="min-w-0"
                 />
               </div>
-
             </div>
 
-            <CardFooter className="flex-col gap-2">
+            <CardFooter className="flex-col gap-2 px-0">
               <Button
                 type="submit"
                 className="w-full rounded-xl"
               >
                 Login
-              </Button>
-
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full rounded-xl"
-              >
-                Login with Google
               </Button>
             </CardFooter>
           </form>

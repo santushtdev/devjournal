@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -48,11 +49,14 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md space-y-6 rounded-lg border p-6">
+    <main className="flex min-h-screen w-full items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
+      <div className="w-full max-w-md space-y-6 rounded-lg border p-5 sm:p-6">
         <div>
-          <h1 className="text-2xl font-bold">Create Account</h1>
-          <p className="text-sm text-muted-foreground">
+          <h1 className="text-2xl font-bold sm:text-3xl">
+            Create Account
+          </h1>
+
+          <p className="mt-1 text-sm text-muted-foreground">
             Create your DevJournal account
           </p>
         </div>
@@ -63,7 +67,7 @@ export default function RegisterPage() {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full min-w-0 rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
           />
 
           <input
@@ -72,7 +76,7 @@ export default function RegisterPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full min-w-0 rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
           />
 
           <input
@@ -81,11 +85,11 @@ export default function RegisterPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full min-w-0 rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
           />
 
           {error && (
-            <p className="text-sm text-red-500">
+            <p className="break-words text-sm text-red-500">
               {error}
             </p>
           )}
@@ -93,12 +97,12 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
+            className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 }
