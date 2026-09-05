@@ -21,30 +21,30 @@ export async function GET(
   }
 
   const { id } = await context.params;
-  const projectId = Number(id);
+  const snippetId = Number(id);
 
-  if (Number.isNaN(projectId)) {
+  if (Number.isNaN(snippetId)) {
     return Response.json(
-      { error: "Invalid project ID" },
+      { error: "Invalid snippet ID" },
       { status: 400 }
     );
   }
 
-  const project = await prisma.project.findFirst({
+  const snippet = await prisma.snippet.findFirst({
     where: {
-      id: projectId,
+      id: snippetId,
       userId: session.user.id,
     },
   });
 
-  if (!project) {
+  if (!snippet) {
     return Response.json(
-      { error: "Project not found" },
+      { error: "Snippet not found" },
       { status: 404 }
     );
   }
 
-  return Response.json(project);
+  return Response.json(snippet);
 }
 
 export async function PUT(
@@ -61,43 +61,51 @@ export async function PUT(
   }
 
   const { id } = await context.params;
-  const projectId = Number(id);
+  const snippetId = Number(id);
 
-  if (Number.isNaN(projectId)) {
+  if (Number.isNaN(snippetId)) {
     return Response.json(
-      { error: "Invalid project ID" },
+      { error: "Invalid snippet ID" },
       { status: 400 }
     );
   }
 
   const body = await request.json();
 
-  const existingProject = await prisma.project.findFirst({
+  const existingSnippet = await prisma.snippet.findFirst({
     where: {
-      id: projectId,
+      id: snippetId,
       userId: session.user.id,
     },
   });
 
-  if (!existingProject) {
+  if (!existingSnippet) {
     return Response.json(
-      { error: "Project not found" },
+      { error: "Snippet not found" },
       { status: 404 }
     );
   }
 
-  const project = await prisma.project.update({
+  if (!body.title || !body.code || !body.language) {
+    return Response.json(
+      { error: "Title, code, and language are required" },
+      { status: 400 }
+    );
+  }
+
+  const snippet = await prisma.snippet.update({
     where: {
-      id: projectId,
+      id: snippetId,
     },
     data: {
       title: body.title,
-      desciption: body.desciption,
-      githubUrl: body.githubUrl,
+      code: body.code,
+      language: body.language,
+      desciption: body.desciption || null,
     },
   });
 
-  return Response.json(project);
+  return Response.json(snippet);
 }
 
 export async function DELETE(
@@ -114,39 +122,36 @@ export async function DELETE(
   }
 
   const { id } = await context.params;
-  const projectId = Number(id);
+  const snippetId = Number(id);
 
-  if (Number.isNaN(projectId)) {
+  if (Number.isNaN(snippetId)) {
     return Response.json(
-      { error: "Invalid project ID" },
+      { error: "Invalid snippet ID" },
       { status: 400 }
     );
   }
 
-  const existingProject = await prisma.project.findFirst({
+  const existingSnippet = await prisma.snippet.findFirst({
     where: {
-      id: projectId,
+      id: snippetId,
       userId: session.user.id,
     },
   });
 
-  if (!existingProject) {
+  if (!existingSnippet) {
     return Response.json(
-      { error: "Project not found" },
+      { error: "Snippet not found" },
       { status: 404 }
     );
   }
 
-  await prisma.project.delete({
+  await prisma.snippet.delete({
     where: {
-      id: projectId,
+      id: snippetId,
     },
   });
 
   return Response.json({
-    message: "Project deleted successfully",
+    message: "Snippet deleted successfully",
   });
-} 
- 
-   
-
+}

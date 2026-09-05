@@ -21,30 +21,30 @@ export async function GET(
   }
 
   const { id } = await context.params;
-  const projectId = Number(id);
+  const noteId = Number(id);
 
-  if (Number.isNaN(projectId)) {
+  if (Number.isNaN(noteId)) {
     return Response.json(
-      { error: "Invalid project ID" },
+      { error: "Invalid note ID" },
       { status: 400 }
     );
   }
 
-  const project = await prisma.project.findFirst({
+  const note = await prisma.notes.findFirst({
     where: {
-      id: projectId,
+      id: noteId,
       userId: session.user.id,
     },
   });
 
-  if (!project) {
+  if (!note) {
     return Response.json(
-      { error: "Project not found" },
+      { error: "Note not found" },
       { status: 404 }
     );
   }
 
-  return Response.json(project);
+  return Response.json(note);
 }
 
 export async function PUT(
@@ -61,43 +61,50 @@ export async function PUT(
   }
 
   const { id } = await context.params;
-  const projectId = Number(id);
+  const noteId = Number(id);
 
-  if (Number.isNaN(projectId)) {
+  if (Number.isNaN(noteId)) {
     return Response.json(
-      { error: "Invalid project ID" },
+      { error: "Invalid note ID" },
       { status: 400 }
     );
   }
 
   const body = await request.json();
 
-  const existingProject = await prisma.project.findFirst({
+  const existingNote = await prisma.notes.findFirst({
     where: {
-      id: projectId,
+      id: noteId,
       userId: session.user.id,
     },
   });
 
-  if (!existingProject) {
+  if (!existingNote) {
     return Response.json(
-      { error: "Project not found" },
+      { error: "Note not found" },
       { status: 404 }
     );
   }
 
-  const project = await prisma.project.update({
+  if (!body.title || !body.content) {
+    return Response.json(
+      { error: "Title and content are required" },
+      { status: 400 }
+    );
+  }
+
+  const note = await prisma.notes.update({
     where: {
-      id: projectId,
+      id: noteId,
     },
     data: {
       title: body.title,
-      desciption: body.desciption,
-      githubUrl: body.githubUrl,
+      content: body.content,
+      category: body.category || null,
     },
   });
 
-  return Response.json(project);
+  return Response.json(note);
 }
 
 export async function DELETE(
@@ -114,39 +121,36 @@ export async function DELETE(
   }
 
   const { id } = await context.params;
-  const projectId = Number(id);
+  const noteId = Number(id);
 
-  if (Number.isNaN(projectId)) {
+  if (Number.isNaN(noteId)) {
     return Response.json(
-      { error: "Invalid project ID" },
+      { error: "Invalid note ID" },
       { status: 400 }
     );
   }
 
-  const existingProject = await prisma.project.findFirst({
+  const existingNote = await prisma.notes.findFirst({
     where: {
-      id: projectId,
+      id: noteId,
       userId: session.user.id,
     },
   });
 
-  if (!existingProject) {
+  if (!existingNote) {
     return Response.json(
-      { error: "Project not found" },
+      { error: "Note not found" },
       { status: 404 }
     );
   }
 
-  await prisma.project.delete({
+  await prisma.notes.delete({
     where: {
-      id: projectId,
+      id: noteId,
     },
   });
 
   return Response.json({
-    message: "Project deleted successfully",
+    message: "Note deleted successfully",
   });
-} 
- 
-   
-
+}

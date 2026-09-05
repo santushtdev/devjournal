@@ -14,23 +14,38 @@ import {
 export default async function Home() {
   const session = await auth();
 
-  const projects = await prisma.project.findMany({
-    orderBy: {
-      updatedAt: "desc",
-    },
-  });
+  const projects = session?.user?.id
+    ? await prisma.project.findMany({
+        where: {
+          userId: session.user.id,
+        },
+        orderBy: {
+          updatedAt: "desc",
+        },
+      })
+    : [];
 
-  const notes = await prisma.notes.findMany({
-    orderBy: {
-      updatedAt: "desc",
-    },
-  });
+  const notes = session?.user?.id
+    ? await prisma.notes.findMany({
+        where: {
+          userId: session.user.id,
+        },
+        orderBy: {
+          updatedAt: "desc",
+        },
+      })
+    : [];
 
-  const snippets = await prisma.snippet.findMany({
-    orderBy: {
-      updatedAt: "desc",
-    },
-  });
+  const snippets = session?.user?.id
+    ? await prisma.snippet.findMany({
+        where: {
+          userId: session.user.id,
+        },
+        orderBy: {
+          updatedAt: "desc",
+        },
+      })
+    : [];
 
   const userName = session?.user?.name || session?.user?.email || "User";
 
