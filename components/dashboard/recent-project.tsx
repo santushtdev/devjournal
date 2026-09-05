@@ -1,8 +1,5 @@
-
-
-
-import { ProjectItem } from "./project-items"
-import { FolderGit2, MoreHorizontal } from "lucide-react"
+import { ProjectItem } from "./project-items";
+import { FolderGit2, MoreHorizontal } from "lucide-react";
 import {
   Card,
   CardAction,
@@ -10,22 +7,23 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
 type Project = {
-  id: number
-  title: string
-  desciption: string
-  githubUrl: string
-  createdAt: Date
-  updatedAt: Date
-}
+  id: number;
+  title: string;
+  desciption: string;
+  githubUrl: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 type RecentProjectProps = {
-  projects : Project[],
-}
+  projects: Project[];
+};
 
-export function RecentProject({projects}:RecentProjectProps) {
+export function RecentProject({ projects }: RecentProjectProps) {
+  const recentProjects = projects.slice(0, 3);
 
   return (
     <Card className="flex h-full flex-col rounded-xl border-border/70 bg-card/95 shadow-sm">
@@ -36,7 +34,7 @@ export function RecentProject({projects}:RecentProjectProps) {
         </div>
 
         <CardTitle className="mt-1 font-mono text-lg font-semibold tracking-tight">
-          Recent Project
+          Recent Projects
         </CardTitle>
 
         <CardDescription className="max-w-md leading-6">
@@ -55,16 +53,32 @@ export function RecentProject({projects}:RecentProjectProps) {
       </CardHeader>
 
       <CardContent className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
-        {projects.map((project) => (
-          <ProjectItem
-            key={project.id}
-            title={project.title}
-            desciption={project.desciption}
-            githubUrl={project.githubUrl}
-            updatedAt={project.updatedAt.toLocaleDateString()}
-          />
-        ))}
+        {recentProjects.length === 0 ? (
+          <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed p-6 text-center">
+            <div>
+              <FolderGit2 className="mx-auto size-7 text-muted-foreground" />
+
+              <p className="mt-3 font-mono text-sm font-medium">
+                No projects yet
+              </p>
+
+              <p className="mt-1 text-xs text-muted-foreground">
+                Create a project to see it here.
+              </p>
+            </div>
+          </div>
+        ) : (
+          recentProjects.map((project) => (
+            <ProjectItem
+              key={project.id}
+              title={project.title}
+              desciption={project.desciption}
+              githubUrl={project.githubUrl}
+              updatedAt={project.updatedAt.toLocaleDateString()}
+            />
+          ))
+        )}
       </CardContent>
     </Card>
-  )
+  );
 }

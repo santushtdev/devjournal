@@ -22,7 +22,7 @@ import {
 import { ModeToggle } from "@/components/mode-toggle";
 
 const items = [
-  { title: "Create Project", url: "/projects/new", icon: FolderPlus },
+  { title: "Create Project", url: "/projects/create", icon: FolderPlus },
   { title: "Project", url: "/projects", icon: FolderKanban },
   { title: "Notes", url: "/notes", icon: NotebookPen },
   { title: "Snippets", url: "/snippets", icon: Code2 },
